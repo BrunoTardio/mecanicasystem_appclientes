@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mecanicasystemappclientes/telas/PainelCliente.dart';
 
 class CadastrarCliente extends StatefulWidget {
   @override
@@ -142,6 +143,9 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
                         borderRadius: BorderRadius.circular(32)),
                     onPressed: () {
 
+                      Navigator.push(context, MaterialPageRoute(
+                        builder:  (_)=>PainelCliente()
+                      ));
 
 
                     },
