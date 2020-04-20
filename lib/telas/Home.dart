@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mecanicasystemappclientes/telas/CadastrarCliente.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -74,7 +75,13 @@ class _HomeState extends State<Home> {
                       "Não tem conta ? cliente para cadastrar-se !",
                       style: TextStyle(color: Colors.black87),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (_)=>CadastrarCliente()
+                    ));
+
+
+                    },
                   ),
                 ),
                 Padding(
