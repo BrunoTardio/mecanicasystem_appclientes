@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mecanicasystemappclientes/telas/MinhaGaragem.dart';
 
@@ -6,19 +8,20 @@ class AdicionarVeiculoCLiente extends StatefulWidget {
   _AdicionarVeiculoCLienteState createState() =>
       _AdicionarVeiculoCLienteState();
 }
-
 class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
+
 
 
   TextEditingController _controllerTipoVeiculo = TextEditingController();
   TextEditingController _controllerMontadoraVeiculo = TextEditingController();
   TextEditingController _controllerNomeVeiculo = TextEditingController();
   TextEditingController _controllerAnoVeiculo = TextEditingController();
-  TextEditingController _controllerKilometragemVeiculo = TextEditingController();
+  TextEditingController _controllerKilometragemVeiculo =
+      TextEditingController();
   TextEditingController _controllerPlacaVeiculo = TextEditingController();
+  String _mensagemErro = "";
 
-  _validarDados(){
-
+  _validarDados() {
     String tipoVeiculo = _controllerPlacaVeiculo.text;
     String montadoraVeiculo = _controllerMontadoraVeiculo.text;
     String nomeVeiculo = _controllerNomeVeiculo.text;
@@ -26,11 +29,28 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
     String kilometragemVeiculo = _controllerKilometragemVeiculo.text;
     String placaVeiculo = _controllerPlacaVeiculo.text;
 
+    if (tipoVeiculo.isNotEmpty) {
+      if (montadoraVeiculo.isNotEmpty) {
+        if (nomeVeiculo.isNotEmpty) {
+          if (anoVeiculo.isNotEmpty) {
+            if (kilometragemVeiculo.isNotEmpty) {
+              if (placaVeiculo.isNotEmpty) {
+
+                FirebaseAuth auth = FirebaseAuth.instance;
+                Firestore db = Firestore.instance;
+                db.collection("usuarios");
 
 
+
+
+
+              }
+            }
+          }
+        }
+      }
+    } else {}
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +76,10 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
-                    controller: _controllerTipoVeiculo ,
+                    controller: _controllerTipoVeiculo,
                     autofocus: true,
                     keyboardType: TextInputType.text,
-                    style: TextStyle(fontSize: 20 ),
+                    style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                         hintText: "Tipo de veículo, ex: Motocicleta",
@@ -72,14 +92,13 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                         )),
                   ),
                 ),
-
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
                     controller: _controllerMontadoraVeiculo,
                     autofocus: true,
                     keyboardType: TextInputType.text,
-                    style: TextStyle(fontSize: 20 ),
+                    style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                         hintText: "Montadora, ex: Fiat",
@@ -91,14 +110,13 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                         )),
                   ),
                 ),
-
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
                     controller: _controllerNomeVeiculo,
                     autofocus: true,
                     keyboardType: TextInputType.text,
-                    style: TextStyle(fontSize: 20 ),
+                    style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                         hintText: "Nome do veículo, ex: Uno",
@@ -116,7 +134,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                     controller: _controllerAnoVeiculo,
                     autofocus: true,
                     keyboardType: TextInputType.text,
-                    style: TextStyle(fontSize: 20 ),
+                    style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                         hintText: "ano de fabricação , ex : 1998",
@@ -134,7 +152,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                       controller: _controllerKilometragemVeiculo,
                       autofocus: true,
                       keyboardType: TextInputType.numberWithOptions(),
-                      style: TextStyle(fontSize: 20 ),
+                      style: TextStyle(fontSize: 20),
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                           hintText: "Kilometragem, ex: 250600",
@@ -151,7 +169,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                     controller: _controllerPlacaVeiculo,
                     autofocus: true,
                     keyboardType: TextInputType.emailAddress,
-                    style: TextStyle(fontSize: 20 ),
+                    style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                         hintText: "Número da placa , ex : PUA1010",
@@ -163,7 +181,6 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                         )),
                   ),
                 ),
-
               ],
             ),
           ),
@@ -177,7 +194,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-         _validarDados();
+          _validarDados();
         },
         tooltip: 'Increment Counter',
         child: Icon(Icons.add_circle),
