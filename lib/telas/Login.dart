@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mecanicasystemappclientes/model/Usuario.dart';
 import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
 
 class Login extends StatefulWidget {
@@ -7,6 +9,54 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController _controllerEmail = TextEditingController();
+  TextEditingController _controllerSenha = TextEditingController();
+  String _mensagemErro = "";
+
+  _validarCampos() {
+    String email = _controllerEmail.text;
+    String senha = _controllerSenha.text;
+
+    if (email.isNotEmpty && email.contains("@")) {
+      if (senha.isNotEmpty) {
+        setState(() {
+          _mensagemErro = "";
+        });
+
+        Usuario usuario = Usuario();
+        usuario.email = email;
+        usuario.senha = senha;
+
+        _logarUsuario(usuario);
+      } else {
+        setState(() {
+          _mensagemErro = "Preencha a senha!";
+        });
+      }
+    } else {
+      setState(() {
+        _mensagemErro = "Preencha o E-mail utilizando @";
+      });
+    }
+  }
+
+  _logarUsuario(Usuario usuario) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    auth
+        .signInWithEmailAndPassword(
+            email: usuario.email, password: usuario.senha)
+        .then((firebaseUser) {
+      Navigator.pushReplacementNamed(
+          context, RouteGenerator.ROTA_PAINEL_CLIENTE);
+    }).catchError((error) {
+      setState(() {
+        _mensagemErro =
+            "Erro ao autenticar usuário, verifique e-mail e senha e tente novamente!";
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +78,7 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    controller: _controllerEmail,
                     autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(fontSize: 20),
@@ -45,6 +96,7 @@ class _LoginState extends State<Login> {
                     padding: EdgeInsets.only(bottom: 12),
                     child: TextField(
                       obscureText: true,
+                      controller: _controllerSenha,
                       keyboardType: TextInputType.text,
                       style: TextStyle(fontSize: 20),
                       decoration: InputDecoration(
@@ -65,7 +117,12 @@ class _LoginState extends State<Login> {
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
-                    onPressed: () {},
+                    onPressed: () {
+
+                      _validarCampos();
+
+
+                    },
                   ),
                 ),
                 Padding(
@@ -76,8 +133,8 @@ class _LoginState extends State<Login> {
                       style: TextStyle(color: Colors.black87),
                     ),
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, RouteGenerator.ROTA_CADASTRAR_CLIENTE);
-
+                      Navigator.pushReplacementNamed(
+                          context, RouteGenerator.ROTA_CADASTRAR_CLIENTE);
                     },
                   ),
                 ),

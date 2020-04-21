@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mecanicasystemappclientes/model/Usuario.dart';
 import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
 
-
 class CadastrarCliente extends StatefulWidget {
   @override
   _CadastrarClienteState createState() => _CadastrarClienteState();
@@ -69,26 +68,25 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
   }
 
   _CadastrarUsuario(Usuario usuario) {
-
     FirebaseAuth auth = FirebaseAuth.instance;
-    auth.createUserWithEmailAndPassword(
-        email: usuario.email,
-        password: usuario.senha).then((firebaseUser){
-
+    auth
+        .createUserWithEmailAndPassword(
+            email: usuario.email, password: usuario.senha)
+        .then((firebaseUser) {
       Firestore db = Firestore.instance;
-      db.collection("usuarios")
+      db
+          .collection("usuarios")
           .document(firebaseUser.user.uid)
           .setData(usuario.toMap());
-      print("firebase user gerado :"+firebaseUser.user.uid);
+      print("firebase user gerado :" + firebaseUser.user.uid);
 
-      Navigator.pushNamedAndRemoveUntil(context, RouteGenerator.ROTA_PAINEL_CLIENTE, (_)=> false);
-
-    }).catchError((error){
+      Navigator.pushNamedAndRemoveUntil(
+          context, RouteGenerator.ROTA_PAINEL_CLIENTE, (_) => false);
+    }).catchError((error) {
       setState(() {
         _mensagemErro = "Erro ao cadastrar o usuario ";
       });
     });
-
   }
 
   @override
