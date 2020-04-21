@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mecanicasystemappclientes/telas/MinhaGaragem.dart';
 
 class PainelCliente extends StatefulWidget {
   @override
@@ -38,7 +39,10 @@ class _PainelClienteState extends State<PainelCliente> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
                     onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (_)=>MinhaGaragem()
 
+                        ));
 
                     },
                   ),
