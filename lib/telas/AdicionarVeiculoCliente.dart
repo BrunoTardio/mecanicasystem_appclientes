@@ -8,6 +8,30 @@ class AdicionarVeiculoCLiente extends StatefulWidget {
 }
 
 class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
+
+
+  TextEditingController _controllerTipoVeiculo = TextEditingController();
+  TextEditingController _controllerMontadoraVeiculo = TextEditingController();
+  TextEditingController _controllerNomeVeiculo = TextEditingController();
+  TextEditingController _controllerAnoVeiculo = TextEditingController();
+  TextEditingController _controllerKilometragemVeiculo = TextEditingController();
+  TextEditingController _controllerPlacaVeiculo = TextEditingController();
+
+  _validarDados(){
+
+    String tipoVeiculo = _controllerPlacaVeiculo.text;
+    String montadoraVeiculo = _controllerMontadoraVeiculo.text;
+    String nomeVeiculo = _controllerNomeVeiculo.text;
+    String anoVeiculo = _controllerAnoVeiculo.text;
+    String kilometragemVeiculo = _controllerKilometragemVeiculo.text;
+    String placaVeiculo = _controllerPlacaVeiculo.text;
+
+
+
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +56,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    controller: _controllerTipoVeiculo ,
                     autofocus: true,
                     keyboardType: TextInputType.text,
                     style: TextStyle(fontSize: 20 ),
@@ -51,6 +76,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    controller: _controllerMontadoraVeiculo,
                     autofocus: true,
                     keyboardType: TextInputType.text,
                     style: TextStyle(fontSize: 20 ),
@@ -69,6 +95,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    controller: _controllerNomeVeiculo,
                     autofocus: true,
                     keyboardType: TextInputType.text,
                     style: TextStyle(fontSize: 20 ),
@@ -86,6 +113,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    controller: _controllerAnoVeiculo,
                     autofocus: true,
                     keyboardType: TextInputType.text,
                     style: TextStyle(fontSize: 20 ),
@@ -103,6 +131,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                 Padding(
                     padding: EdgeInsets.only(bottom: 12),
                     child: TextField(
+                      controller: _controllerKilometragemVeiculo,
                       autofocus: true,
                       keyboardType: TextInputType.numberWithOptions(),
                       style: TextStyle(fontSize: 20 ),
@@ -119,6 +148,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    controller: _controllerPlacaVeiculo,
                     autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(fontSize: 20 ),
@@ -147,8 +177,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => MinhaGaragem()));
+         _validarDados();
         },
         tooltip: 'Increment Counter',
         child: Icon(Icons.add_circle),
