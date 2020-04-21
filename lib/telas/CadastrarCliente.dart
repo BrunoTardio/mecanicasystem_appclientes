@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mecanicasystemappclientes/model/Usuario.dart';
-import 'package:mecanicasystemappclientes/telas/PainelCliente.dart';
+
 
 class CadastrarCliente extends StatefulWidget {
   @override
@@ -31,13 +33,11 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
         if ((email1.toString() == email2.toString()) &&
             email1.isNotEmpty &&
             email1.contains("@")) {
-          if ((senha1.toString() == senha2.toString()) &&
-              senha1.length > 5 &&
-              senha1.length < 21) {
+          if ((senha1.toString() == senha2.toString()) && senha1.length > 5) {
             setState(() {
               _mensagemErro = "";
             });
-            Usuario usuario = Usuario()
+            Usuario usuario = Usuario();
             usuario.nome = nome;
             usuario.email = email1;
             usuario.senha = senha1;
@@ -46,14 +46,13 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
             _CadastrarUsuario(usuario);
           } else {
             setState(() {
-              _mensagemErro =
-              "senha deve conter + de 5 caracteres e ser igual em ambos os campos";
+              _mensagemErro = "senha deve conter + de 5 caracteres";
             });
           }
         } else {
           setState(() {
             _mensagemErro =
-            "email deve ser igual em ambos os campos e conter @ ";
+                "email deve ser igual em ambos os campos e conter @ ";
           });
         }
       } else {
@@ -63,13 +62,33 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
       }
     } else {
       setState(() {
-        _mensagemErro = "preencha seu cpf";
+        _mensagemErro = "preencha todos os dados corretamente";
       });
     }
   }
 
   _CadastrarUsuario(Usuario usuario) {
 
+    FirebaseAuth auth = FirebaseAuth.instance;
+    auth.createUserWithEmailAndPassword(
+        email: usuario.email,
+        password: usuario.senha).then((firebaseUser){
+
+      Firestore db = Firestore.instance;
+      db.collection("usuarios")
+          .document(firebaseUser.user.uid)
+          .setData(usuario.toMap());
+      print("firebase user gerado :"+firebaseUser.user.uid);
+
+     //Navigator.pushNamedAndRemoveUntil(context, RouteGenerator.ROTA_HOME, (_)=>false);
+
+
+    }).catchError((error){
+      setState(() {
+        _mensagemErro = "Erro ao cadastrar o usuario ";
+        print(usuario.email + usuario.senha);
+      });
+    });
 
   }
 
@@ -207,6 +226,12 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
                     onPressed: () {
                       _ValidarCampos();
                     },
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    _mensagemErro,
+                    style: TextStyle(color: Colors.red, fontSize: 20),
                   ),
                 ),
               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mecanicasystemappclientes/telas/Login.dart';
 import 'package:mecanicasystemappclientes/telas/ProcurarMecanicos.dart';
 import 'telas/home.dart';
 
@@ -8,7 +9,7 @@ void main() {
       primaryColor: Colors.grey[50],
     ),
     title: "msCliente",
-    home: Home(),
+    home: Login(),
     debugShowCheckedModeBanner: false,
   ));
 }
