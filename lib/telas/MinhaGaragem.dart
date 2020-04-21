@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mecanicasystemappclientes/telas/AdicionarVeiculoCliente.dart';
 
 class MinhaGaragem extends StatefulWidget {
   @override
@@ -24,11 +25,14 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment Counter',
-        child: Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      onPressed: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (_) => AdicionarVeiculoCLiente()));
+      },
+      tooltip: 'Increment Counter',
+      child: Icon(Icons.add_circle),
+    ),
+    floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
