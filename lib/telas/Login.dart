@@ -57,6 +57,22 @@ class _LoginState extends State<Login> {
     });
   }
 
+  Future _verificarUsuarioLogado() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    FirebaseUser usuarioLogado = await auth.currentUser();
+
+    if (usuarioLogado != null) {
+      Navigator.pushReplacementNamed(context, RouteGenerator.ROTA_PAINEL_CLIENTE);
+    }
+  }
+
+  @override
+  void initState() {
+    _verificarUsuarioLogado();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,10 +134,7 @@ class _LoginState extends State<Login> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
                     onPressed: () {
-
                       _validarCampos();
-
-
                     },
                   ),
                 ),
