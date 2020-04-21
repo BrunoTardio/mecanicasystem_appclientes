@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mecanicasystemappclientes/telas/CadastrarCliente.dart';
+import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -76,9 +76,8 @@ class _LoginState extends State<Login> {
                       style: TextStyle(color: Colors.black87),
                     ),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder:(_)=>CadastrarCliente()
-                      ));
+                      Navigator.pushReplacementNamed(context, RouteGenerator.ROTA_CADASTRAR_CLIENTE);
+
                     },
                   ),
                 ),
