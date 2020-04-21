@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mecanicasystemappclientes/telas/AdicionarVeiculoCliente.dart';
+import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
 
 class MinhaGaragem extends StatefulWidget {
   @override
@@ -26,8 +27,7 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
       ),
       floatingActionButton: FloatingActionButton(
       onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (_) => AdicionarVeiculoCLiente()));
+        Navigator.pushNamed(context,RouteGenerator.ROTA_ADICIONAR_VEICULO_CLIENTE);
       },
       tooltip: 'Increment Counter',
       child: Icon(Icons.add_circle),

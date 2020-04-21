@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:mecanicasystemappclientes/telas/AdicionarVeiculoCliente.dart';
 import 'package:mecanicasystemappclientes/telas/CadastrarCliente.dart';
 import 'package:mecanicasystemappclientes/telas/Login.dart';
+import 'package:mecanicasystemappclientes/telas/MinhaGaragem.dart';
 import 'package:mecanicasystemappclientes/telas/PainelCliente.dart';
 
 class RouteGenerator {
   static const String ROTA_LOGIN = "/telas/Login";
   static const String ROTA_CADASTRAR_CLIENTE = "/telas/CadastrarCliente";
   static const String ROTA_PAINEL_CLIENTE = "/telas/PainelCliente";
+  static const String ROTA_MINHA_GARAGEM = "/telas/MinhaGaragem";
+  static const String ROTA_ADICIONAR_VEICULO_CLIENTE ="/telas/AdicionarVeiculoCliente";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -20,6 +24,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => CadastrarCliente());
       case ROTA_PAINEL_CLIENTE:
         return MaterialPageRoute(builder: (_) => PainelCliente());
+      case ROTA_MINHA_GARAGEM:
+        return MaterialPageRoute(builder: (_) => MinhaGaragem());
+      case ROTA_ADICIONAR_VEICULO_CLIENTE:
+        return MaterialPageRoute(builder: (_) => AdicionarVeiculoCLiente());
       default:
         _erroRota();
     }
