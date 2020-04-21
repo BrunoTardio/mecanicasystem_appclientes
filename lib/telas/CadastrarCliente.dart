@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mecanicasystemappclientes/model/Usuario.dart';
 import 'package:mecanicasystemappclientes/telas/PainelCliente.dart';
 
 class CadastrarCliente extends StatefulWidget {
@@ -7,6 +8,71 @@ class CadastrarCliente extends StatefulWidget {
 }
 
 class _CadastrarClienteState extends State<CadastrarCliente> {
+  // Formulario controladores
+  TextEditingController _controllerNome = TextEditingController();
+  TextEditingController _controllerEmail1 = TextEditingController();
+  TextEditingController _controllerEmail2 = TextEditingController();
+  TextEditingController _controllerSenha1 = TextEditingController();
+  TextEditingController _controllerSenha2 = TextEditingController();
+  TextEditingController _controllerCPF = TextEditingController();
+  String _mensagemErro = "";
+
+  // funcionalidades da pagina
+
+  _ValidarCampos() {
+    String nome = _controllerNome.text;
+    String email1 = _controllerEmail1.text;
+    String email2 = _controllerEmail1.text;
+    String senha1 = _controllerSenha1.text;
+    String senha2 = _controllerSenha2.text;
+    String cpf = _controllerCPF.text;
+    if (cpf.isNotEmpty) {
+      if (nome.isNotEmpty && nome.length > 3) {
+        if ((email1.toString() == email2.toString()) &&
+            email1.isNotEmpty &&
+            email1.contains("@")) {
+          if ((senha1.toString() == senha2.toString()) &&
+              senha1.length > 5 &&
+              senha1.length < 21) {
+            setState(() {
+              _mensagemErro = "";
+            });
+            Usuario usuario = Usuario()
+            usuario.nome = nome;
+            usuario.email = email1;
+            usuario.senha = senha1;
+            usuario.cpf = cpf;
+
+            _CadastrarUsuario(usuario);
+          } else {
+            setState(() {
+              _mensagemErro =
+              "senha deve conter + de 5 caracteres e ser igual em ambos os campos";
+            });
+          }
+        } else {
+          setState(() {
+            _mensagemErro =
+            "email deve ser igual em ambos os campos e conter @ ";
+          });
+        }
+      } else {
+        setState(() {
+          _mensagemErro = "preencha seu nome ";
+        });
+      }
+    } else {
+      setState(() {
+        _mensagemErro = "preencha seu cpf";
+      });
+    }
+  }
+
+  _CadastrarUsuario(Usuario usuario) {
+
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,11 +94,10 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
                       width: 200,
                       height: 150,
                     )),
-
-
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    controller: _controllerNome,
                     autofocus: true,
                     keyboardType: TextInputType.text,
                     style: TextStyle(fontSize: 20),
@@ -46,11 +111,10 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
                         )),
                   ),
                 ),
-
-
                 Padding(
                     padding: EdgeInsets.only(bottom: 12),
                     child: TextField(
+                      controller: _controllerCPF,
                       autofocus: true,
                       keyboardType: TextInputType.number,
                       style: TextStyle(fontSize: 20),
@@ -63,11 +127,10 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
                             borderRadius: BorderRadius.circular(32),
                           )),
                     )),
-
-
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    controller: _controllerEmail1,
                     autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(fontSize: 20),
@@ -84,6 +147,7 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    controller: _controllerEmail2,
                     autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(fontSize: 20),
@@ -97,10 +161,10 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
                         )),
                   ),
                 ),
-
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    controller: _controllerSenha1,
                     autofocus: true,
                     keyboardType: TextInputType.text,
                     style: TextStyle(fontSize: 20),
@@ -114,10 +178,10 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
                         )),
                   ),
                 ),
-
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    controller: _controllerSenha2,
                     autofocus: true,
                     keyboardType: TextInputType.text,
                     style: TextStyle(fontSize: 20),
@@ -131,7 +195,6 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
                         )),
                   ),
                 ),
-
                 Padding(
                   padding: EdgeInsets.only(top: 16, bottom: 10),
                   child: RaisedButton(
@@ -142,22 +205,10 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
                     onPressed: () {
-
-                      Navigator.push(context, MaterialPageRoute(
-                        builder:  (_)=>PainelCliente()
-                      ));
-
-
+                      _ValidarCampos();
                     },
                   ),
                 ),
-
-
-
-
-
-
-
               ],
             ),
           ),

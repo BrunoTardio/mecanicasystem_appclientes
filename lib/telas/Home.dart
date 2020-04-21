@@ -7,6 +7,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,10 +77,6 @@ class _HomeState extends State<Home> {
                       style: TextStyle(color: Colors.black87),
                     ),
                     onTap: () {
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (_)=>CadastrarCliente()
-                    ));
-
 
                     },
                   ),
