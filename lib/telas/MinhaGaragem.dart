@@ -57,6 +57,7 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
       body: Container(
         child: FutureBuilder<List<VeiculoCliente>>(
           future: _recuperarVeiculos(),
+          // ignore: missing_return
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
