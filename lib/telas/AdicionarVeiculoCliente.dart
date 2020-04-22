@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mecanicasystemappclientes/telas/MinhaGaragem.dart';
+import 'dart:async';
+
+import 'package:mecanicasystemappclientes/model/Usuario.dart';
+import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
+import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
 
 class AdicionarVeiculoCLiente extends StatefulWidget {
   @override
@@ -21,8 +25,8 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
   TextEditingController _controllerPlacaVeiculo = TextEditingController();
   String _mensagemErro = "";
 
-  _validarDados() {
-    String tipoVeiculo = _controllerPlacaVeiculo.text;
+  _validarDados() async {
+    String tipoVeiculo = _controllerTipoVeiculo.text;
     String montadoraVeiculo = _controllerMontadoraVeiculo.text;
     String nomeVeiculo = _controllerNomeVeiculo.text;
     String anoVeiculo = _controllerAnoVeiculo.text;
@@ -37,19 +41,36 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
               if (placaVeiculo.isNotEmpty) {
 
                 FirebaseAuth auth = FirebaseAuth.instance;
+                FirebaseUser usuarioLogado = await auth.currentUser();
+                VeiculoCliente veiculoCliente = VeiculoCliente();
+
+                veiculoCliente.tipoVeiculo = tipoVeiculo;
+                veiculoCliente.montadoraVeiculo = montadoraVeiculo;
+                veiculoCliente.nomeVeiculo = nomeVeiculo;
+                veiculoCliente.anoVeiculo = anoVeiculo;
+                veiculoCliente.kilometragemVeiculo = kilometragemVeiculo;
+                veiculoCliente.placaVeiculo = placaVeiculo;
+
                 Firestore db = Firestore.instance;
-                db.collection("usuarios");
+                DocumentReference docRef = await db
+                .collection("usuarios")
+                .document(usuarioLogado.uid)
+                .collection("veiculos")
+                .add(veiculoCliente.toMap());
 
 
+                print(docRef.documentID);
 
-
+                Navigator.pushNamed(context, RouteGenerator.ROTA_MINHA_GARAGEM);
 
               }
             }
           }
         }
       }
-    } else {}
+    } else {
+
+    }
   }
 
   @override
