@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mecanicasystemappclientes/telas/AdicionarVeiculoCliente.dart';
+import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
 import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
 
 class MinhaGaragem extends StatefulWidget {
@@ -8,6 +10,44 @@ class MinhaGaragem extends StatefulWidget {
 }
 
 class _MinhaGaragemState extends State<MinhaGaragem> {
+  String _idUsuarioLogado;
+
+  Future<List<VeiculoCliente>> _recuperarVeiculos() async {
+    Firestore db = Firestore.instance;
+    QuerySnapshot querySnapshot = await db
+        .collection("usuarios")
+        .document(_idUsuarioLogado)
+        .collection("veiculos")
+        .getDocuments();
+
+    List<VeiculoCliente> listaVeiculos = List();
+    for (DocumentSnapshot item in querySnapshot.documents) {
+      var dados = item.data;
+      VeiculoCliente veiculo = VeiculoCliente();
+      veiculo.tipoVeiculo = dados['tipoVeiculo'];
+      veiculo.nomeVeiculo = dados['nomeVeiculo'];
+      veiculo.placaVeiculo = dados['placaVeiculo'];
+      veiculo.kilometragemVeiculo = dados['kilometragemVeiculo'];
+      veiculo.anoVeiculo = dados['anoVeiculo'];
+      veiculo.montadoraVeiculo = dados['montadoraVeiculo'];
+
+      listaVeiculos.add(veiculo);
+    }
+    return listaVeiculos;
+  }
+
+  _recuperarDadosUsuario() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    FirebaseUser user = await auth.currentUser();
+    _idUsuarioLogado = user.uid;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _recuperarDadosUsuario();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,9 +55,42 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
         title: Text("Minha Garagem"),
       ),
       body: Container(
-        child: Text(
-            " Aqui tera uma lista de veiculos cadastrados com botao detalhar veiculos e em detalhar"
-            "veiculos irao ter todas as o.s e informacoes sobre aquele veiculo cadastrado "),
+        child: FutureBuilder<List<VeiculoCliente>>(
+          future: _recuperarVeiculos(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+                return Center(
+                  child: Column(
+                    children: <Widget>[
+                      Text("Carregando veiculos"),
+                      CircularProgressIndicator()
+                    ],
+                  ),
+                );
+                break;
+
+              case ConnectionState.active:
+              case ConnectionState.done:
+                return ListView.builder(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (_, indice) {
+                      List<VeiculoCliente> listaItens = snapshot.data;
+                      VeiculoCliente veiculoCliente = listaItens[indice];
+
+                      return ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                          title: Text(
+                            veiculoCliente.nomeVeiculo,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          )
+                      );
+                    });
+            }
+          },
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
@@ -26,13 +99,14 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-      onPressed: () {
-        Navigator.pushNamed(context,RouteGenerator.ROTA_ADICIONAR_VEICULO_CLIENTE);
-      },
-      tooltip: 'Increment Counter',
-      child: Icon(Icons.add_circle),
-    ),
-    floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        onPressed: () {
+          Navigator.pushNamed(
+              context, RouteGenerator.ROTA_ADICIONAR_VEICULO_CLIENTE);
+        },
+        tooltip: 'Increment Counter',
+        child: Icon(Icons.add_circle),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
