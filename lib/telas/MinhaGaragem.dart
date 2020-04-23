@@ -14,6 +14,7 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
 
   Future<List<VeiculoCliente>> _recuperarVeiculos() async {
     Firestore db = Firestore.instance;
+    await _recuperarDadosUsuario();
     QuerySnapshot querySnapshot = await db
         .collection("usuarios")
         .document(_idUsuarioLogado)
@@ -45,7 +46,6 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
   @override
   void initState() {
     super.initState();
-    _recuperarDadosUsuario();
   }
 
   @override
@@ -80,13 +80,26 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                       List<VeiculoCliente> listaItens = snapshot.data;
                       VeiculoCliente veiculoCliente = listaItens[indice];
 
-                      return ListTile(
-                          contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                          title: Text(
-                            veiculoCliente.nomeVeiculo,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
-                          )
+                      return Card(
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Veículo :  " + veiculoCliente.nomeVeiculo,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                              Text(
+                                "Placa :  " + veiculoCliente.placaVeiculo,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              )
+                            ],
+                          ),
+                        ),
                       );
                     });
             }
