@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mecanicasystemappclientes/model/Usuario.dart';
 import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
+import 'package:mecanicasystemappclientes/telas/VeiculoDetalhe.dart';
 import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
 
 class MinhaGaragem extends StatefulWidget {
@@ -80,24 +82,35 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                       List<VeiculoCliente> listaItens = snapshot.data;
                       VeiculoCliente veiculoCliente = listaItens[indice];
 
-                      return Card(
-                        child: Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                "Veículo :  " + veiculoCliente.nomeVeiculo,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16),
-                              ),
-                              Text(
-                                "Placa :  " + veiculoCliente.placaVeiculo,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16),
-                              )
-                            ],
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => VeiculoDetalhe(
+                                      _idUsuarioLogado, veiculoCliente)));
+                        },
+                        child: Card(
+                          child: Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Veículo :  " + veiculoCliente.nomeVeiculo,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+                                Text(
+                                  "Placa :  " + veiculoCliente.placaVeiculo,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       );
