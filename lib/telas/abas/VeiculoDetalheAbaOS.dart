@@ -8,6 +8,8 @@ class VeiculoDetalheAbaOS extends StatefulWidget {
 class _VeiculoDetalheAbaOSState extends State<VeiculoDetalheAbaOS> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text(" Aqui ira aparecer todo o Historico de O.S lançadas para este veiculo "),
+    );
   }
 }

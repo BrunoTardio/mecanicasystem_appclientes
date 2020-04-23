@@ -29,7 +29,6 @@ class VeiculoDetalhe extends StatefulWidget {
 class _VeiculoDetalheState extends State<VeiculoDetalhe>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
-  List<String> itensMenu = ["Configuracoes", "Deslogar"];
 
   @override
   void initState() {
@@ -56,10 +55,11 @@ class _VeiculoDetalheState extends State<VeiculoDetalhe>
             )
           ],
         ),
+
       ),
       body: TabBarView(
         controller: _tabController,
-        children: <Widget>[VeiculoDetalheAbaOS(),VeiculoDetalheAbaDetalhes()],
+        children: <Widget>[VeiculoDetalheAbaOS(), VeiculoDetalheAbaDetalhes()],
       ),
     );
   }

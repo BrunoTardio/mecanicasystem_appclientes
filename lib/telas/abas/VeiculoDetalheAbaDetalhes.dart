@@ -7,6 +7,9 @@ class VeiculoDetalheAbaDetalhes extends StatefulWidget {
 class _VeiculoDetalheAbaDetalhesState extends State<VeiculoDetalheAbaDetalhes> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text(" aqui ira aparecer informacoes sobre editar veiculo , deletar, colocar foto e transferencia "),
+
+    );
   }
 }

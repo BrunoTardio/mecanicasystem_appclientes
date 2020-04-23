@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mecanicasystemappclientes/telas/MinhaGaragem.dart';
 import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class PainelCliente extends StatefulWidget {
   @override
@@ -8,11 +8,43 @@ class PainelCliente extends StatefulWidget {
 }
 
 class _PainelClienteState extends State<PainelCliente> {
+  List<String> itensMenu = ["Configuracoes", "Deslogar"];
+
+  _escolhaMenuItem(String itemEscolhido) {
+    switch (itemEscolhido) {
+      case "Configurações":
+        Text("Em desenvolvimento ...");
+        break;
+      case "Deslogar":
+        _deslogarUsuario();
+        break;
+    }
+  }
+
+  _deslogarUsuario() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    await auth.signOut();
+    Navigator.pushReplacementNamed(context, RouteGenerator.ROTA_LOGIN);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Serviços"),
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            onSelected: _escolhaMenuItem,
+            itemBuilder: (contex) {
+              return itensMenu.map((String item) {
+                return PopupMenuItem<String>(
+                  value: item,
+                  child: Text(item),
+                );
+              }).toList();
+            },
+          )
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(color: Colors.grey[200]),
@@ -29,7 +61,6 @@ class _PainelClienteState extends State<PainelCliente> {
                       width: 200,
                       height: 150,
                     )),
-
                 Padding(
                   padding: EdgeInsets.only(top: 16, bottom: 10),
                   child: RaisedButton(
@@ -40,11 +71,9 @@ class _PainelClienteState extends State<PainelCliente> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
                     onPressed: () {
-                        Navigator.pushNamed(context, RouteGenerator.ROTA_MINHA_GARAGEM);
-
+                      Navigator.pushNamed(
+                          context, RouteGenerator.ROTA_MINHA_GARAGEM);
                     },
-
-
                   ),
                 ),
                 Padding(
@@ -56,10 +85,7 @@ class _PainelClienteState extends State<PainelCliente> {
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
-                    onPressed: () {
-
-
-                    },
+                    onPressed: () {},
                   ),
                 ),
                 Padding(
@@ -71,12 +97,10 @@ class _PainelClienteState extends State<PainelCliente> {
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
-                    onPressed: () {
-
-
-                    },
+                    onPressed: () {},
                   ),
-                ), Padding(
+                ),
+                Padding(
                   padding: EdgeInsets.only(top: 16, bottom: 10),
                   child: RaisedButton(
                     child: Text("Solicitar guincho",
@@ -85,11 +109,9 @@ class _PainelClienteState extends State<PainelCliente> {
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                   ),
                 ),
-
                 Padding(
                   padding: EdgeInsets.only(top: 16, bottom: 10),
                   child: RaisedButton(
@@ -99,8 +121,7 @@ class _PainelClienteState extends State<PainelCliente> {
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                   ),
                 ),
                 Padding(
@@ -112,20 +133,9 @@ class _PainelClienteState extends State<PainelCliente> {
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                   ),
                 ),
-
-
-
-
-
-
-
-
-
-
               ],
             ),
           ),
