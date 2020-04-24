@@ -1,10 +1,13 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
-import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
+import 'package:flutter_masked_text/flutter_masked_text.Dart';
 
 class AdicionarOSVeiculo extends StatefulWidget {
+
 
   VeiculoCliente veiculoCliente = VeiculoCliente();
   AdicionarOSVeiculo({this.veiculoCliente});
@@ -38,12 +41,13 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+
                     autofocus: true,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                        hintText: "Tipo de veículo, ex: Motocicleta",
+                        hintText: "Kilometragem atual do veículo",
                         hintStyle: TextStyle(fontSize: 16),
                         focusColor: Colors.black,
                         filled: true,
@@ -57,11 +61,12 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
                     autofocus: true,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 4,
                     style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                        hintText: "Montadora, ex: Fiat",
+                        hintText: "Descreva os problemas encontrados",
                         hintStyle: TextStyle(fontSize: 16),
                         filled: true,
                         fillColor: Colors.white,
@@ -74,11 +79,12 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
                     autofocus: true,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 4,
                     style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                        hintText: "Nome do veículo, ex: Uno",
+                        hintText: "Descreva os itens usados para manutenção",
                         hintStyle: TextStyle(fontSize: 16),
                         filled: true,
                         fillColor: Colors.white,
@@ -90,12 +96,12 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
-                    autofocus: true,
                     keyboardType: TextInputType.text,
+                    autofocus: true,
                     style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                        hintText: "ano de fabricação , ex : 1998",
+                        hintText: "tipo de manutenção ex: Elétrico",
                         hintStyle: TextStyle(fontSize: 16),
                         filled: true,
                         fillColor: Colors.white,
@@ -107,12 +113,18 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                 Padding(
                     padding: EdgeInsets.only(bottom: 12),
                     child: TextField(
+
+                      inputFormatters: [
+                        WhitelistingTextInputFormatter.digitsOnly,
+                        RealInputFormatter(centavos: true),
+                      ],
                       autofocus: true,
-                      keyboardType: TextInputType.numberWithOptions(),
+                      keyboardType: TextInputType.number,
                       style: TextStyle(fontSize: 20),
                       decoration: InputDecoration(
+                          prefixText: "R\$",
                           contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          hintText: "Kilometragem, ex: 250600",
+                          hintText: "  valor total das peças",
                           hintStyle: TextStyle(fontSize: 16),
                           filled: true,
                           fillColor: Colors.white,
@@ -123,12 +135,17 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    inputFormatters: [
+                      WhitelistingTextInputFormatter.digitsOnly,
+                      RealInputFormatter(centavos: true),
+                    ],
                     autofocus: true,
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.number,
                     style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
+                        prefixText: "R\$",
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                        hintText: "Número da placa , ex : PUA1010",
+                        hintText: "  valor total da mão de obra",
                         hintStyle: TextStyle(fontSize: 16),
                         filled: true,
                         fillColor: Colors.white,

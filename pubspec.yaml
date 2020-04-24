@@ -27,7 +27,8 @@ dependencies:
   cloud_firestore: ^0.13.4+2
   firebase_storage: ^3.1.5
   firebase_auth: ^0.15.5+3
-
+  brasil_fields: ^0.0.7+2
+  flutter_masked_text: ^0.7.0
 
 dev_dependencies:
   flutter_test:

@@ -66,6 +66,7 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
               case ConnectionState.waiting:
                 return Center(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text("Carregando veiculos"),
                       CircularProgressIndicator()
