@@ -5,11 +5,37 @@ class VeiculoDetalheAbaDetalhes extends StatefulWidget {
 }
 
 class _VeiculoDetalheAbaDetalhesState extends State<VeiculoDetalheAbaDetalhes> {
+
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(" aqui ira aparecer informacoes sobre editar veiculo , deletar, colocar foto e transferencia "),
+    return Scaffold(
+      body: Container(
+
+
+
+
+
+
+      ),
+
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Container(
+          height: 50.0,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+
+        },
+        tooltip: 'Increment Counter',
+        child: Icon(Icons.settings),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
 
     );
   }
 }
+

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
 
 class VeiculoDetalheAbaOS extends StatefulWidget {
   @override
@@ -8,8 +9,30 @@ class VeiculoDetalheAbaOS extends StatefulWidget {
 class _VeiculoDetalheAbaOSState extends State<VeiculoDetalheAbaOS> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(" Aqui ira aparecer todo o Historico de O.S lançadas para este veiculo "),
+    return Scaffold(
+
+
+
+
+
+
+
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Container(
+          height: 50.0,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+            Navigator.pushNamed(context, RouteGenerator.ROTA_ADICIONAR_OS_VEICULO);
+        },
+        tooltip: 'Increment Counter',
+        child: Icon(Icons.add_circle),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+
     );
   }
 }
