@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
-import 'package:mecanicasystemappclientes/telas/AdicionarVeiculoCliente.dart';
+import 'package:mecanicasystemappclientes/telas/minhaGaragem/AdicionarVeiculoCliente.dart';
 import 'package:mecanicasystemappclientes/telas/CadastrarCliente.dart';
 import 'package:mecanicasystemappclientes/telas/Login.dart';
-import 'package:mecanicasystemappclientes/telas/MinhaGaragem.dart';
+import 'package:mecanicasystemappclientes/telas/minhaGaragem/MinhaGaragem.dart';
 import 'package:mecanicasystemappclientes/telas/PainelCliente.dart';
 import 'package:mecanicasystemappclientes/telas/abas/AdicionarOSVeiculo.dart';
 

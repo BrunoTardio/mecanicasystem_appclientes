@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mecanicasystemappclientes/model/Usuario.dart';
 import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
-import 'package:mecanicasystemappclientes/telas/VeiculoDetalhe.dart';
+import 'package:mecanicasystemappclientes/telas/minhaGaragem/VeiculoDetalhe.dart';
 import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
 
 class MinhaGaragem extends StatefulWidget {
