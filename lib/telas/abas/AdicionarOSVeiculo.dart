@@ -1,15 +1,16 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:flutter/material.dart';
+
 import 'package:flutter/services.dart';
 import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
-import 'package:flutter_masked_text/flutter_masked_text.Dart';
+import 'package:mecanicasystemappclientes/model/VeiculoOS.dart';
 
 class AdicionarOSVeiculo extends StatefulWidget {
-
-
   VeiculoCliente veiculoCliente = VeiculoCliente();
+
   AdicionarOSVeiculo({this.veiculoCliente});
 
   @override
@@ -17,6 +18,57 @@ class AdicionarOSVeiculo extends StatefulWidget {
 }
 
 class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
+  TextEditingController _kilometroVeiculo = TextEditingController();
+  TextEditingController _osProblemas = TextEditingController();
+  TextEditingController _osItens = TextEditingController();
+  TextEditingController _osTipo = TextEditingController();
+  TextEditingController _osValorPecas = TextEditingController();
+  TextEditingController _osValorMaoDeObra = TextEditingController();
+
+  _SalvarOS() async {
+    String kilometroVeiculo = _kilometroVeiculo.text;
+    String osProblemas = _osProblemas.text;
+    String osItens = _osItens.text;
+    String osTipo = _osTipo.text;
+    String osValorPecas = _osValorPecas.text;
+    String osValorMaoDeObra = _osValorMaoDeObra.text;
+    if (kilometroVeiculo.isNotEmpty) {
+      if (osProblemas.isNotEmpty) {
+        if (osItens.isNotEmpty) {
+          if (osTipo.isNotEmpty) {
+            if (osValorPecas.isNotEmpty) {
+              if (osValorPecas.isNotEmpty) {
+                FirebaseAuth auth = FirebaseAuth.instance;
+                FirebaseUser usuarioLogado = await auth.currentUser();
+                VeiculoOS veiculoOS = VeiculoOS();
+                veiculoOS.kilometragemOS = kilometroVeiculo;
+                veiculoOS.valorPecasOS = osValorPecas;
+                veiculoOS.itensOS = osItens;
+                veiculoOS.problemasOS = osProblemas;
+                veiculoOS.tipoOS = osTipo;
+                veiculoOS.valorMaoDeObraOS = osValorMaoDeObra;
+
+                Firestore db =  Firestore.instance;
+                DocumentReference docRef = await db
+                .collection("usuarios")
+                .document(usuarioLogado.uid)
+                .collection("veiculos")
+                .document("UHPBc2yI36nLuTxUNetY")
+                .collection("OS")
+                .add(veiculoOS.toMap());
+
+                print(docRef.documentID);
+
+
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,10 +93,10 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
-
                     autofocus: true,
                     keyboardType: TextInputType.number,
                     style: TextStyle(fontSize: 20),
+                    controller: _kilometroVeiculo,
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                         hintText: "Kilometragem atual do veículo",
@@ -64,6 +116,7 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                     keyboardType: TextInputType.multiline,
                     maxLines: 4,
                     style: TextStyle(fontSize: 20),
+                    controller: _osProblemas,
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                         hintText: "Descreva os problemas encontrados",
@@ -82,6 +135,7 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                     keyboardType: TextInputType.multiline,
                     maxLines: 4,
                     style: TextStyle(fontSize: 20),
+                    controller: _osItens,
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                         hintText: "Descreva os itens usados para manutenção",
@@ -99,6 +153,7 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                     keyboardType: TextInputType.text,
                     autofocus: true,
                     style: TextStyle(fontSize: 20),
+                    controller: _osTipo,
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                         hintText: "tipo de manutenção ex: Elétrico",
@@ -113,12 +168,12 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                 Padding(
                     padding: EdgeInsets.only(bottom: 12),
                     child: TextField(
-
                       inputFormatters: [
                         WhitelistingTextInputFormatter.digitsOnly,
                         RealInputFormatter(centavos: true),
                       ],
                       autofocus: true,
+                      controller: _osValorPecas,
                       keyboardType: TextInputType.number,
                       style: TextStyle(fontSize: 20),
                       decoration: InputDecoration(
@@ -142,6 +197,7 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                     autofocus: true,
                     keyboardType: TextInputType.number,
                     style: TextStyle(fontSize: 20),
+                    controller: _osValorMaoDeObra,
                     decoration: InputDecoration(
                         prefixText: "R\$",
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
@@ -166,7 +222,9 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          _SalvarOS();
+        },
         tooltip: 'Increment Counter',
         child: Icon(Icons.add_circle),
       ),

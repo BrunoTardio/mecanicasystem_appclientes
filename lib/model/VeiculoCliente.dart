@@ -1,4 +1,7 @@
 class VeiculoCliente {
+
+  String _idVeiculo;
+
   String _tipoVeiculo;
 
   String _montadoraVeiculo;
@@ -59,5 +62,11 @@ class VeiculoCliente {
 
   set tipoVeiculo(String value) {
     _tipoVeiculo = value;
+  }
+
+  String get idVeiculo => _idVeiculo;
+
+  set idVeiculo(String value) {
+    _idVeiculo = value;
   }
 }
