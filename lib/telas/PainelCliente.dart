@@ -133,7 +133,11 @@ class _PainelClienteState extends State<PainelCliente> {
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(
+                          context, RouteGenerator.ROTA_INFO_APLICATIVO);
+
+                    },
                   ),
                 ),
               ],
