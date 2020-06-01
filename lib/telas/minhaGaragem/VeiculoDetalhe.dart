@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
-import 'package:mecanicasystemappclientes/telas/abas/VeiculoDetalheAbaDetalhes.dart';
-import 'package:mecanicasystemappclientes/telas/abas/VeiculoDetalheAbaOS.dart';
+import 'file:///C:/Users/bruno/AndroidStudioProjects/Flutter/mecanicasystem_appclientes/lib/telas/minhaGaragem/tab/VeiculoDetalheAbaDetalhes.dart';
+import 'file:///C:/Users/bruno/AndroidStudioProjects/Flutter/mecanicasystem_appclientes/lib/telas/minhaGaragem/tab/VeiculoDetalheAbaOS.dart';
 
 class VeiculoDetalhe extends StatefulWidget {
   String _idUsuarioLogado;
@@ -59,7 +59,9 @@ class _VeiculoDetalheState extends State<VeiculoDetalhe>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: <Widget>[VeiculoDetalheAbaOS(), VeiculoDetalheAbaDetalhes()],
+        children: <Widget>[
+          VeiculoDetalheAbaOS(widget._idUsuarioLogado,widget._veiculoCliente),
+          VeiculoDetalheAbaDetalhes()],
       ),
     );
   }

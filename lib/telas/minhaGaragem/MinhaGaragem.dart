@@ -93,7 +93,7 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                         },
                         child: Card(
                           child: Padding(
-                            padding: EdgeInsets.all(10.0),
+                            padding: EdgeInsets.all(50.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,7 +109,20 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
-                                )
+                                ),
+                                Text(
+                                  "Ano :  " + veiculoCliente.anoVeiculo,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+                                Text(
+                                  "Kilometragem :  " +
+                                      veiculoCliente.kilometragemVeiculo,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
                               ],
                             ),
                           ),
