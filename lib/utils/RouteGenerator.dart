@@ -7,7 +7,6 @@ import 'package:mecanicasystemappclientes/telas/CadastrarCliente.dart';
 import 'package:mecanicasystemappclientes/telas/Login.dart';
 import 'package:mecanicasystemappclientes/telas/minhaGaragem/MinhaGaragem.dart';
 import 'package:mecanicasystemappclientes/telas/PainelCliente.dart';
-import 'file:///C:/Users/bruno/AndroidStudioProjects/Flutter/mecanicasystem_appclientes/lib/telas/minhaGaragem/tab/AdicionarOSVeiculo.dart';
 
 class RouteGenerator {
   static const String ROTA_LOGIN = "/telas/Login";

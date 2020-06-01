@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
-import 'file:///C:/Users/bruno/AndroidStudioProjects/Flutter/mecanicasystem_appclientes/lib/telas/minhaGaragem/tab/VeiculoDetalheAbaDetalhes.dart';
-import 'file:///C:/Users/bruno/AndroidStudioProjects/Flutter/mecanicasystem_appclientes/lib/telas/minhaGaragem/tab/VeiculoDetalheAbaOS.dart';
+
+import 'tab/VeiculoDetalheAbaDetalhes.dart';
+import 'tab/VeiculoDetalheAbaOS.dart';
 
 class VeiculoDetalhe extends StatefulWidget {
   String _idUsuarioLogado;

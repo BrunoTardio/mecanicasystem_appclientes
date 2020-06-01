@@ -27,6 +27,8 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
     for (DocumentSnapshot item in querySnapshot.documents) {
       var dados = item.data;
       VeiculoCliente veiculo = VeiculoCliente();
+      print(item.documentID);
+      veiculo.idVeiculo = item.documentID;
       veiculo.tipoVeiculo = dados['tipoVeiculo'];
       veiculo.nomeVeiculo = dados['nomeVeiculo'];
       veiculo.placaVeiculo = dados['placaVeiculo'];
@@ -118,7 +120,7 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                                 ),
                                 Text(
                                   "Kilometragem :  " +
-                                      veiculoCliente.kilometragemVeiculo,
+                                      veiculoCliente.idVeiculo,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
