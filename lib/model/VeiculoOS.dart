@@ -14,9 +14,11 @@ class VeiculoOS {
     Map<String, dynamic> map = {
       "localResponsavelOS": this._localResponsavelOS,
       "problemasOS": this.problemasOS,
+      "kilometragemOS": this.kilometragemOS,
       "itensOS": this.itensOS,
+      "tipoOS" : this.tipoOS,
       "valorPecasOS": this.valorPecasOS,
-      "valorMaoDeObra": this.valorPecasOS,
+      "valorMaoDeObra": this.valorMaoDeObraOS,
     };
     return map;
   }
