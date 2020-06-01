@@ -9,12 +9,26 @@ import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
 import 'package:mecanicasystemappclientes/model/VeiculoOS.dart';
 
 class AdicionarOSVeiculo extends StatefulWidget {
-  VeiculoCliente veiculoCliente = VeiculoCliente();
+  String _idUsuarioLogado;
 
-  AdicionarOSVeiculo({this.veiculoCliente});
+  VeiculoCliente _veiculoCliente = VeiculoCliente();
+
+  AdicionarOSVeiculo(this._idUsuarioLogado, this._veiculoCliente);
+
+  String get idUsuarioLogado => _idUsuarioLogado;
+
+  set idUsuarioLogado(String value) {
+    _idUsuarioLogado = value;
+  }
 
   @override
   _AdicionarOSVeiculoState createState() => _AdicionarOSVeiculoState();
+
+  VeiculoCliente get veiculoCliente => _veiculoCliente;
+
+  set veiculoCliente(VeiculoCliente value) {
+    _veiculoCliente = value;
+  }
 }
 
 class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
@@ -48,19 +62,16 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                 veiculoOS.tipoOS = osTipo;
                 veiculoOS.valorMaoDeObraOS = osValorMaoDeObra;
 
-                Firestore db =  Firestore.instance;
+                Firestore db = Firestore.instance;
                 DocumentReference docRef = await db
-                .collection("usuarios")
-                .document(usuarioLogado.uid)
-                .collection("veiculos")
-                .document("UHPBc2yI36nLuTxUNetY")
-                .collection("OS")
-                .add(veiculoOS.toMap());
+                    .collection("usuarios")
+                    .document(usuarioLogado.uid)
+                    .collection("veiculos")
+                    .document("UHPBc2yI36nLuTxUNetY")
+                    .collection("OS")
+                    .add(veiculoOS.toMap());
 
                 print(docRef.documentID);
-
-
-
               }
             }
           }

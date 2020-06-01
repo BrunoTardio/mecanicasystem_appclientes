@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
+import 'package:mecanicasystemappclientes/telas/minhaGaragem/tab/AdicionarOSVeiculo.dart';
 import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
 
 class VeiculoDetalheAbaOS extends StatefulWidget {
@@ -29,11 +30,7 @@ class _VeiculoDetalheAbaOSState extends State<VeiculoDetalheAbaOS> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Text("${widget.veiculoCliente.nomeVeiculo}"),
-
-
-
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         child: Container(
@@ -42,8 +39,12 @@ class _VeiculoDetalheAbaOSState extends State<VeiculoDetalheAbaOS> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(
-              context, RouteGenerator.ROTA_ADICIONAR_OS_VEICULO);
+          // esta fora do padrao
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return AdicionarOSVeiculo(
+                widget._idUsuarioLogado, widget._veiculoCliente);
+          }));
+
         },
         tooltip: 'Increment Counter',
         child: Icon(Icons.add_circle),

@@ -35,8 +35,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => MinhaGaragem());
       case ROTA_ADICIONAR_VEICULO_CLIENTE:
         return MaterialPageRoute(builder: (_) => AdicionarVeiculoCLiente());
-      case ROTA_ADICIONAR_OS_VEICULO:
-        return MaterialPageRoute(builder: (_) => AdicionarOSVeiculo());
+     /* case ROTA_ADICIONAR_OS_VEICULO:
+        return MaterialPageRoute(builder: (_) => AdicionarOSVeiculo());*/
       case ROTA_INFO_APLICATIVO:
         return MaterialPageRoute(builder: (_) => inforAplicativo());
       case ROTA_ALCOOL_GASOLINA:
