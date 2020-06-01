@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
 import 'package:mecanicasystemappclientes/model/VeiculoOS.dart';
 
+import '../VeiculoDetalhe.dart';
+
 class AdicionarOSVeiculo extends StatefulWidget {
   String _idUsuarioLogado;
 
@@ -61,17 +63,23 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                 veiculoOS.problemasOS = osProblemas;
                 veiculoOS.tipoOS = osTipo;
                 veiculoOS.valorMaoDeObraOS = osValorMaoDeObra;
+                veiculoOS.localResponsavelOS = usuarioLogado.email;
 
                 Firestore db = Firestore.instance;
                 DocumentReference docRef = await db
                     .collection("usuarios")
                     .document(usuarioLogado.uid)
                     .collection("veiculos")
-                    .document("UHPBc2yI36nLuTxUNetY")
+                    .document(widget._veiculoCliente.idVeiculo)
                     .collection("OS")
                     .add(veiculoOS.toMap());
-
                 print(docRef.documentID);
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => VeiculoDetalhe(
+                            widget._idUsuarioLogado, widget.veiculoCliente)));
               }
             }
           }
