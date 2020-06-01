@@ -35,14 +35,12 @@ class _PainelClienteState extends State<PainelCliente> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.home),
-            onPressed: () {
-
-            },
+            onPressed: () {},
           ),
           IconButton(
             icon: Icon(Icons.directions_car),
             onPressed: () {
-
+              Navigator.pushNamed(context, RouteGenerator.ROTA_MINHA_GARAGEM);
             },
 
           ),

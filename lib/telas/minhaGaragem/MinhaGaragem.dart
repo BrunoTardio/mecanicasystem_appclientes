@@ -55,9 +55,20 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Minha Garagem"),
-      ),
+      appBar: AppBar(title: Text("Minha Garagem"),
+          actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.home),
+          onPressed: () {
+            Navigator.pushNamedAndRemoveUntil(
+                context, RouteGenerator.ROTA_PAINEL_CLIENTE, (_) => false);
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.directions_car),
+          onPressed: () {},
+        ),
+      ]),
       body: Container(
         child: FutureBuilder<List<VeiculoCliente>>(
           future: _recuperarVeiculos(),
@@ -119,14 +130,13 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                 ),
-
                                 Text(
-                                  "Montadora :  " + veiculoCliente.montadoraVeiculo,
+                                  "Montadora :  " +
+                                      veiculoCliente.montadoraVeiculo,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                 ),
-
                                 Text(
                                   "Ano :  " + veiculoCliente.anoVeiculo,
                                   style: TextStyle(
@@ -142,9 +152,6 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                                 ),
                               ],
                             ),
-
-
-
                           ),
                         ),
                       );

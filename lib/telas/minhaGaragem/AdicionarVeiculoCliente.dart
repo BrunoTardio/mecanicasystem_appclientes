@@ -78,6 +78,23 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Descreva seu veículo"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, RouteGenerator.ROTA_PAINEL_CLIENTE, (_) => false);
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.directions_car),
+            onPressed: () {
+              Navigator.pushNamed(context, RouteGenerator.ROTA_MINHA_GARAGEM);
+            },
+          ),
+
+        ],
+
       ),
       body: Container(
         decoration: BoxDecoration(color: Colors.grey[200]),

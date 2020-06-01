@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
+import 'package:mecanicasystemappclientes/utils/RouteGenerator.dart';
 
 import 'tab/VeiculoDetalheAbaDetalhes.dart';
 import 'tab/VeiculoDetalheAbaOS.dart';
@@ -42,6 +43,22 @@ class _VeiculoDetalheState extends State<VeiculoDetalhe>
     return Scaffold(
       appBar: AppBar(
         title: Text("${widget.veiculoCliente.nomeVeiculo}"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, RouteGenerator.ROTA_PAINEL_CLIENTE, (_) => false);
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.directions_car),
+            onPressed: () {
+              Navigator.pushNamed(context, RouteGenerator.ROTA_MINHA_GARAGEM);
+            },
+          ),
+
+        ],
         bottom: TabBar(
           indicatorWeight: 4,
           labelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
