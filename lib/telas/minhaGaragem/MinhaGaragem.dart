@@ -104,6 +104,7 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                                   "Veículo :  " + veiculoCliente.nomeVeiculo,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
+                                      color: Colors.red,
                                       fontSize: 16),
                                 ),
                                 Text(
@@ -113,6 +114,20 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                                       fontSize: 16),
                                 ),
                                 Text(
+                                  "Tipo :  " + veiculoCliente.tipoVeiculo,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+
+                                Text(
+                                  "Montadora :  " + veiculoCliente.montadoraVeiculo,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+
+                                Text(
                                   "Ano :  " + veiculoCliente.anoVeiculo,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -120,13 +135,16 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                                 ),
                                 Text(
                                   "Kilometragem :  " +
-                                      veiculoCliente.idVeiculo,
+                                      veiculoCliente.kilometragemVeiculo,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                 ),
                               ],
                             ),
+
+
+
                           ),
                         ),
                       );
