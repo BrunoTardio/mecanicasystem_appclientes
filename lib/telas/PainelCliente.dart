@@ -31,8 +31,23 @@ class _PainelClienteState extends State<PainelCliente> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Serviços"),
+        title: Text("MecanicaSystem"),
         actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.directions_car),
+            onPressed: () {
+
+            },
+
+          ),
+
+
           PopupMenuButton<String>(
             onSelected: _escolhaMenuItem,
             itemBuilder: (contex) {
@@ -45,6 +60,13 @@ class _PainelClienteState extends State<PainelCliente> {
             },
           )
         ],
+
+
+
+
+
+
+
       ),
       body: Container(
         decoration: BoxDecoration(color: Colors.grey[200]),
