@@ -66,10 +66,10 @@ class _VeiculoDetalheState extends State<VeiculoDetalhe>
           indicatorColor: Colors.blue,
           tabs: <Widget>[
             Tab(
-              text: "Historico de OS",
+              text: "Detalhes",
             ),
             Tab(
-              text: "Detalhes",
+              text: "Histórico de O.S",
             )
           ],
         ),
@@ -78,8 +78,8 @@ class _VeiculoDetalheState extends State<VeiculoDetalhe>
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          VeiculoDetalheAbaOS(widget._idUsuarioLogado,widget._veiculoCliente),
-          VeiculoDetalheAbaDetalhes()],
+          VeiculoDetalheAbaDetalhes(),
+          VeiculoDetalheAbaOS(widget._idUsuarioLogado,widget._veiculoCliente)],
       ),
     );
   }

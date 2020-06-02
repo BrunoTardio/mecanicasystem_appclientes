@@ -68,6 +68,14 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
           icon: Icon(Icons.directions_car),
           onPressed: () {},
         ),
+        IconButton(
+          icon: Icon(Icons.description),
+          onPressed: () {},
+        )
+
+
+
+
       ]),
       body: Container(
         child: FutureBuilder<List<VeiculoCliente>>(
