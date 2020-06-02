@@ -17,6 +17,7 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
   TextEditingController _controllerSenha1 = TextEditingController();
   TextEditingController _controllerSenha2 = TextEditingController();
   TextEditingController _controllerCPF = TextEditingController();
+  TextEditingController _controllerTelefone = TextEditingController();
   String _mensagemErro = "";
 
   // funcionalidades da pagina
@@ -28,6 +29,8 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
     String senha1 = _controllerSenha1.text;
     String senha2 = _controllerSenha2.text;
     String cpf = _controllerCPF.text;
+    String telefone = _controllerTelefone.text;
+
     if (cpf.isNotEmpty) {
       if (nome.isNotEmpty && nome.length > 3) {
         if ((email1.toString() == email2.toString()) &&
@@ -42,22 +45,25 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
             usuario.email = email1;
             usuario.senha = senha1;
             usuario.cpf = cpf;
+            usuario.cnpj = "";
+            usuario.tipoUser = "cliente";
+            usuario.telefone = telefone.isEmpty ? "" : telefone;
 
             _CadastrarUsuario(usuario);
           } else {
             setState(() {
-              _mensagemErro = "senha deve conter + de 5 caracteres";
+              _mensagemErro = "senha deve conter ao menos 6 caracteres";
             });
           }
         } else {
           setState(() {
             _mensagemErro =
-                "email deve ser igual em ambos os campos e conter @ ";
+                "verificar se o email esta correto e se possui o '@' ";
           });
         }
       } else {
         setState(() {
-          _mensagemErro = "preencha seu nome ";
+          _mensagemErro = "preencha seu nome completo ";
         });
       }
     } else {
@@ -84,7 +90,7 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
           context, RouteGenerator.ROTA_PAINEL_CLIENTE, (_) => false);
     }).catchError((error) {
       setState(() {
-        _mensagemErro = "Erro ao cadastrar o usuario ";
+        _mensagemErro = "Erro ao cadastrar o usuário ";
       });
     });
   }
@@ -137,6 +143,22 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                           hintText: "Seu CPF apenas números",
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(32),
+                          )),
+                    )),
+                Padding(
+                    padding: EdgeInsets.only(bottom: 12),
+                    child: TextField(
+                      controller: _controllerTelefone,
+                      autofocus: true,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(fontSize: 20),
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                          hintText: "Caso queira, informe um telefone",
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -215,7 +237,8 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
                   padding: EdgeInsets.only(top: 16, bottom: 10),
                   child: RaisedButton(
                     child: Text(" CADASTRAR ",
-                        style: TextStyle(color: Colors.black87, fontSize: 20)),
+                        style:
+                            TextStyle(color: Colors.deepPurple, fontSize: 20)),
                     color: Colors.grey[50],
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(

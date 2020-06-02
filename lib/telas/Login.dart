@@ -63,7 +63,8 @@ class _LoginState extends State<Login> {
     FirebaseUser usuarioLogado = await auth.currentUser();
 
     if (usuarioLogado != null) {
-      Navigator.pushReplacementNamed(context, RouteGenerator.ROTA_PAINEL_CLIENTE);
+      Navigator.pushReplacementNamed(
+          context, RouteGenerator.ROTA_PAINEL_CLIENTE);
     }
   }
 
@@ -127,8 +128,8 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: EdgeInsets.only(top: 16, bottom: 10),
                   child: RaisedButton(
-                    child: Text("Entrar",
-                        style: TextStyle(color: Colors.black87, fontSize: 20)),
+                    child: Text("ENTRAR",
+                        style: TextStyle(color: Colors.deepPurple, fontSize: 20)),
                     color: Colors.grey[50],
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(
@@ -140,15 +141,53 @@ class _LoginState extends State<Login> {
                 ),
                 Padding(
                   padding: EdgeInsets.all(10),
-                  child: GestureDetector(
-                    child: Text(
-                      "Não tem conta ? cliente para cadastrar-se !",
-                      style: TextStyle(color: Colors.black87),
-                    ),
-                    onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, RouteGenerator.ROTA_CADASTRAR_CLIENTE);
-                    },
+                  child: Column(
+                    children: <Widget>[
+                      GestureDetector(
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Text(
+                                    "Clique e cadastre-se!",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, RouteGenerator.ROTA_CADASTRAR_CLIENTE);
+                        },
+                      ),
+                      GestureDetector(
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Text(
+                                    "Recuperar senha ...",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        onTap: () {
+                          /* Navigator.pushReplacementNamed(
+                              context, RouteGenerator.ROTA_CADASTRAR_RECUPERAR_SENHA);*/
+                        },
+                      ),
+                    ],
                   ),
                 ),
                 Padding(

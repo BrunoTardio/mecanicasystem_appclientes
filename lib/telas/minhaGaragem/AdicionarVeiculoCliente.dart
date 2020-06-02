@@ -12,10 +12,8 @@ class AdicionarVeiculoCLiente extends StatefulWidget {
   _AdicionarVeiculoCLienteState createState() =>
       _AdicionarVeiculoCLienteState();
 }
+
 class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
-
-
-
   TextEditingController _controllerTipoVeiculo = TextEditingController();
   TextEditingController _controllerMontadoraVeiculo = TextEditingController();
   TextEditingController _controllerNomeVeiculo = TextEditingController();
@@ -39,7 +37,6 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
           if (anoVeiculo.isNotEmpty) {
             if (kilometragemVeiculo.isNotEmpty) {
               if (placaVeiculo.isNotEmpty) {
-
                 FirebaseAuth auth = FirebaseAuth.instance;
                 FirebaseUser usuarioLogado = await auth.currentUser();
                 VeiculoCliente veiculoCliente = VeiculoCliente();
@@ -53,24 +50,20 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
 
                 Firestore db = Firestore.instance;
                 DocumentReference docRef = await db
-                .collection("usuarios")
-                .document(usuarioLogado.uid)
-                .collection("veiculos")
-                .add(veiculoCliente.toMap());
-
+                    .collection("usuarios")
+                    .document(usuarioLogado.uid)
+                    .collection("veiculos")
+                    .add(veiculoCliente.toMap());
 
                 print(docRef.documentID);
 
                 Navigator.pushNamed(context, RouteGenerator.ROTA_MINHA_GARAGEM);
-
               }
             }
           }
         }
       }
-    } else {
-
-    }
+    } else {}
   }
 
   @override
@@ -92,9 +85,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
               Navigator.pushNamed(context, RouteGenerator.ROTA_MINHA_GARAGEM);
             },
           ),
-
         ],
-
       ),
       body: Container(
         decoration: BoxDecoration(color: Colors.grey[200]),
@@ -235,7 +226,9 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
           _validarDados();
         },
         tooltip: 'Increment Counter',
-        child: Icon(Icons.add_circle),
+        child: SingleChildScrollView(
+          child: Icon(Icons.add_circle),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

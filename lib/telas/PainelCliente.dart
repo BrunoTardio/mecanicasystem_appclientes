@@ -99,8 +99,8 @@ class _PainelClienteState extends State<PainelCliente> {
                 Padding(
                   padding: EdgeInsets.only(top: 16, bottom: 10),
                   child: RaisedButton(
-                    child: Text("Procurar mecânicos",
-                        style: TextStyle(color: Colors.black87, fontSize: 20)),
+                    child: Text("Função em construção",
+                        style: TextStyle(color: Colors.red, fontSize: 20)),
                     color: Colors.grey[50],
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(
@@ -111,8 +111,8 @@ class _PainelClienteState extends State<PainelCliente> {
                 Padding(
                   padding: EdgeInsets.only(top: 16, bottom: 10),
                   child: RaisedButton(
-                    child: Text("Buscar peças automotivas",
-                        style: TextStyle(color: Colors.black87, fontSize: 20)),
+                    child: Text("Função em construção",
+                        style: TextStyle(color: Colors.red, fontSize: 20)),
                     color: Colors.grey[50],
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(
@@ -123,8 +123,8 @@ class _PainelClienteState extends State<PainelCliente> {
                 Padding(
                   padding: EdgeInsets.only(top: 16, bottom: 10),
                   child: RaisedButton(
-                    child: Text("Solicitar guincho",
-                        style: TextStyle(color: Colors.black87, fontSize: 20)),
+                    child: Text("Função em construção",
+                        style: TextStyle(color: Colors.red, fontSize: 20)),
                     color: Colors.grey[50],
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(

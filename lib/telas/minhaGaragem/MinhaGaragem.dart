@@ -21,6 +21,7 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
         .collection("usuarios")
         .document(_idUsuarioLogado)
         .collection("veiculos")
+        .orderBy("kilometragemVeiculo",descending: false)
         .getDocuments();
 
     List<VeiculoCliente> listaVeiculos = List();

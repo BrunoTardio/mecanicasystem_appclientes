@@ -4,6 +4,9 @@ class Usuario {
   String _email;
   String _senha;
   String _idUsuario;
+  String _tipoUser;
+  String _telefone;
+  String _cnpj;
 
   Usuario();
 
@@ -11,7 +14,10 @@ class Usuario {
     Map<String, dynamic> map = {
       "nome": this.nome,
       "email": this.email,
-      "cpf": this.cpf
+      "cpf": this.cpf,
+      "tipoUser": this.tipoUser,
+      "telefone": this.telefone,
+      "cnpj":this.cnpj
     };
     return map;
   }
@@ -44,5 +50,23 @@ class Usuario {
 
   set cpf(String value) {
     _cpf = value;
+  }
+
+  String get tipoUser => _tipoUser;
+
+  set tipoUser(String value) {
+    _tipoUser = value;
+  }
+
+  String get telefone => _telefone;
+
+  set telefone(String value) {
+    _telefone = value;
+  }
+
+  String get cnpj => _cnpj;
+
+  set cnpj(String value) {
+    _cnpj = value;
   }
 }
