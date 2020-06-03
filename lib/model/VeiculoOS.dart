@@ -1,6 +1,7 @@
 class VeiculoOS {
   String _idVeiculoOS;
   String _localResponsavelOS;
+  String _colaboradorResponsavelOS;
   String _problemasOS;
   String _kilometragemOS;
   String _itensOS;

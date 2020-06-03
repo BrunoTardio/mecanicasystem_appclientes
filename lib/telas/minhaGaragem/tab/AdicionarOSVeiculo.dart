@@ -66,6 +66,10 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
                 veiculoOS.valorMaoDeObraOS = osValorMaoDeObra;
                 veiculoOS.localResponsavelOS = usuarioLogado.email;
 
+
+
+
+
                 Firestore db = Firestore.instance;
                 DocumentReference docRef = await db
                     .collection("usuarios")

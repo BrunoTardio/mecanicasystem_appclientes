@@ -27,6 +27,7 @@ class VeiculoCliente {
       "montadoraVeiculo": this.montadoraVeiculo,
       "nomeVeiculo": this.nomeVeiculo,
       "anoVeiculo": this.anoVeiculo,
+      "modeloVeiculo" :this.modeloVeiculo,
       "kilometragemDeCadastro": this._kilometragemDeCadastro,
       "kilometragemAtual": this.kilometragemAtual,
       "placaVeiculo": this.placaVeiculo,

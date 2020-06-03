@@ -65,6 +65,28 @@ class _VeiculoDetalheAbaDetalhesState extends State<VeiculoDetalheAbaDetalhes> {
                     Row(
                       children: <Widget>[
                         Text(
+                          "Modelo :  " + widget._veiculoCliente.modeloVeiculo,
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              fontSize: 18),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          "Tipo :  " + widget._veiculoCliente.tipoVeiculo,
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              fontSize: 18),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Text(
                           "Placa :  " + widget._veiculoCliente.placaVeiculo,
                           style: TextStyle(
                               fontWeight: FontWeight.normal, fontSize: 18),
