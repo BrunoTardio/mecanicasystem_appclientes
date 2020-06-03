@@ -1,14 +1,17 @@
+import 'dart:ffi';
+
 class VeiculoOS {
   String _idVeiculoOS;
   String _localResponsavelOS;
   String _colaboradorResponsavelOS;
   String _problemasOS;
-  String _kilometragemOS;
+  int _kilometragemOS;
   String _itensOS;
   String _tipoOS;
-  String _valorPecasOS;
-  String _valorMaoDeObraOS;
-
+  double _valorPecasOS;
+  double _valorMaoDeObraOS;
+  String _statusOS;
+  DateTime _dataOS;
 
   VeiculoOS();
 
@@ -18,9 +21,12 @@ class VeiculoOS {
       "problemasOS": this.problemasOS,
       "kilometragemOS": this.kilometragemOS,
       "itensOS": this.itensOS,
-      "tipoOS" : this.tipoOS,
+      "tipoOS": this.tipoOS,
       "valorPecasOS": this.valorPecasOS,
       "valorMaoDeObra": this.valorMaoDeObraOS,
+      "colaboradorResponsavelOS": this.colaboradorResponsavelOS,
+      "statusOS": this.statusOS,
+      "dataOS": this.dataOS
     };
     return map;
   }
@@ -39,18 +45,6 @@ class VeiculoOS {
 
   String get problemasOS => _problemasOS;
 
-  String get valorMaoDeObraOS => _valorMaoDeObraOS;
-
-  set valorMaoDeObraOS(String value) {
-    _valorMaoDeObraOS = value;
-  }
-
-  String get valorPecasOS => _valorPecasOS;
-
-  set valorPecasOS(String value) {
-    _valorPecasOS = value;
-  }
-
   String get tipoOS => _tipoOS;
 
   set tipoOS(String value) {
@@ -67,9 +61,39 @@ class VeiculoOS {
     _problemasOS = value;
   }
 
-  String get kilometragemOS => _kilometragemOS;
+  int get kilometragemOS => _kilometragemOS;
 
-  set kilometragemOS(String value) {
+  set kilometragemOS(int value) {
     _kilometragemOS = value;
+  }
+
+  DateTime get dataOS => _dataOS;
+
+  set dataOS(DateTime value) {
+    _dataOS = value;
+  }
+
+  String get statusOS => _statusOS;
+
+  set statusOS(String value) {
+    _statusOS = value;
+  }
+
+  String get colaboradorResponsavelOS => _colaboradorResponsavelOS;
+
+  set colaboradorResponsavelOS(String value) {
+    _colaboradorResponsavelOS = value;
+  }
+
+  double get valorMaoDeObraOS => _valorMaoDeObraOS;
+
+  set valorMaoDeObraOS(double value) {
+    _valorMaoDeObraOS = value;
+  }
+
+  double get valorPecasOS => _valorPecasOS;
+
+  set valorPecasOS(double value) {
+    _valorPecasOS = value;
   }
 }

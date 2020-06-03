@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,42 +45,44 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
   TextEditingController _osValorMaoDeObra = TextEditingController();
 
   _SalvarOS() async {
-    String kilometroVeiculo = _kilometroVeiculo.text;
+    int kilometroVeiculo = int.tryParse(
+        _kilometroVeiculo.text.replaceAll(new RegExp(r'[^\w\s]+'), ''));
     String osProblemas = _osProblemas.text;
     String osItens = _osItens.text;
     String osTipo = _osTipo.text;
-    String osValorPecas = _osValorPecas.text;
-    String osValorMaoDeObra = _osValorMaoDeObra.text;
-    if (kilometroVeiculo.isNotEmpty) {
+
+    double osValorPecas = double.tryParse(
+        _osValorPecas.text.replaceAll(new RegExp(r'[^\w\s]+'), ''));
+
+    double osValorMaoDeObra = double.tryParse(
+        _osValorMaoDeObra.text.replaceAll(new RegExp(r'[^\w\s]+'), ''));
+
+    if (kilometroVeiculo >= 0) {
       if (osProblemas.isNotEmpty) {
         if (osItens.isNotEmpty) {
           if (osTipo.isNotEmpty) {
-            if (osValorPecas.isNotEmpty) {
-              if (osValorPecas.isNotEmpty) {
+            if (osValorPecas >= 0) {
+              if (osValorPecas >= 0) {
                 FirebaseAuth auth = FirebaseAuth.instance;
                 FirebaseUser usuarioLogado = await auth.currentUser();
+
                 VeiculoOS veiculoOS = VeiculoOS();
                 veiculoOS.kilometragemOS = kilometroVeiculo;
-                veiculoOS.valorPecasOS = osValorPecas;
+                veiculoOS.valorPecasOS = osValorPecas/10;
                 veiculoOS.itensOS = osItens;
-                veiculoOS.problemasOS = osProblemas;
                 veiculoOS.tipoOS = osTipo;
-                veiculoOS.valorMaoDeObraOS = osValorMaoDeObra;
+                veiculoOS.problemasOS = osProblemas;
+                veiculoOS.valorMaoDeObraOS = osValorMaoDeObra/10;
+
+                print(osValorMaoDeObra);
+
                 veiculoOS.localResponsavelOS = usuarioLogado.email;
+                veiculoOS.colaboradorResponsavelOS = usuarioLogado.email;
+                veiculoOS.statusOS = "Fechado";
+                veiculoOS.dataOS = DateTime.now();
 
-
-
-
-
-                Firestore db = Firestore.instance;
-                DocumentReference docRef = await db
-                    .collection("usuarios")
-                    .document(usuarioLogado.uid)
-                    .collection("veiculos")
-                    .document(widget._veiculoCliente.idVeiculo)
-                    .collection("OS")
-                    .add(veiculoOS.toMap());
-                print(docRef.documentID);
+                _salvarOsEmVeiculo(veiculoOS, usuarioLogado.uid,
+                    widget._veiculoCliente.idVeiculo);
 
                 Navigator.push(
                     context,
@@ -93,12 +97,38 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
     }
   }
 
+  _salvarOsEmVeiculo(
+      VeiculoOS veiculoOS, String idUsuario, String idVeiculo) async {
+    Firestore db = Firestore.instance;
+    DocumentReference docRef = await db
+        .collection("usuarios")
+        .document(idUsuario)
+        .collection("veiculos")
+        .document(idVeiculo)
+        .collection("OS")
+        .add(veiculoOS.toMap());
+
+    if (veiculoOS.kilometragemOS > widget.veiculoCliente.kilometragemAtual) {
+      DocumentReference docRef = await db
+          .collection("usuarios")
+          .document(idUsuario)
+          .collection("veiculos")
+          .document(idVeiculo)
+          .updateData({"kilometragemAtual": veiculoOS.kilometragemOS}).then(
+              (result) {
+        print("KILOMETRO ATUALIZADO");
+      }).catchError((onError) {
+        print("ERRO AO SALVAR");
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Descreva seu veículo"),
+        title: Text("Descreva seu veículo",
+            style: TextStyle(color: Colors.deepPurple)),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.home),
@@ -113,12 +143,7 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
               Navigator.pushNamed(context, RouteGenerator.ROTA_MINHA_GARAGEM);
             },
           ),
-
         ],
-
-
-
-
       ),
       body: Container(
         decoration: BoxDecoration(color: Colors.grey[200]),
@@ -268,6 +293,7 @@ class _AdicionarOSVeiculoState extends State<AdicionarOSVeiculo> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          print("antes de salvar");
           _SalvarOS();
         },
         tooltip: 'Increment Counter',

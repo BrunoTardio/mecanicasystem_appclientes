@@ -49,11 +49,15 @@ class _VeiculoDetalheAbaOSState extends State<VeiculoDetalheAbaOS> {
       os.idVeiculoOS = item.documentID;
       os.kilometragemOS = dados['kilometragemOS'];
       os.localResponsavelOS = dados['localResponsavelOS'];
+      os.colaboradorResponsavelOS = dados['colaboradorResponsavelOS'];
       os.itensOS = dados['itensOS'];
       os.problemasOS = dados['problemasOS'];
       os.tipoOS = dados['tipoOS'];
-      os.valorMaoDeObraOS = dados['valorMaoDeObra'];
-      os.valorPecasOS = dados['valorPecasOS'];
+      os.valorMaoDeObraOS = dados['valorMaoDeObra'] ;
+      os.valorPecasOS = dados['valorPecasOS'] ; // dividindo para corrigir string - sera necessario metodo
+      os.dataOS =  DateTime.tryParse(dados['dataOS'].toDate().toUtc().toIso8601String());
+      os.statusOS = dados['statusOS'];
+      print("chegou aquiiiiiiiiiiii");
       listaOS.add(os);
     }
     return listaOS;
@@ -100,56 +104,87 @@ class _VeiculoDetalheAbaOSState extends State<VeiculoDetalheAbaOS> {
                         },
                         child: Card(
                           child: Padding(
-                            padding: EdgeInsets.all(50.0),
+                            padding: EdgeInsets.all(20.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
+
                                 Text(
-                                  "Kilometragem :  " + veiculoOS.kilometragemOS,
+                                  "Informações da O.S" ,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.red,
-                                      fontSize: 16),
+                                      color: Colors.deepPurple,
+                                      fontSize: 18),
                                 ),
+
+                                Text(
+                                  "Data do serviço :  " +
+                                      veiculoOS.dataOS.day.toString() + "/"
+                                      + veiculoOS.dataOS.month.toString() + "/"
+                                      + veiculoOS.dataOS.year.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.black,
+                                      fontSize: 18),
+                                ),
+
+                                Text(
+                                  "Kilometragem :  " +
+                                      veiculoOS.kilometragemOS.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.red,
+                                      fontSize: 18),
+                                ),
+
+
+
+
                                 Text(
                                   "Tipo de serviço :  " + veiculoOS.tipoOS,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 18),
                                 ),
                                 Text(
                                   "Problemas :  " + veiculoOS.problemasOS,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 18),
                                 ),
                                 Text(
                                   "Itens trocados:  " + veiculoOS.itensOS,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 18),
                                 ),
                                 Text(
-                                  "Custo peças:  " + veiculoOS.valorPecasOS,
+                                  "Custo peças:  " +
+                                      veiculoOS.valorPecasOS.toString(),
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 18),
                                 ),
                                 Text(
                                   "Custo mao de obra:  " +
-                                      veiculoOS.valorMaoDeObraOS,
+                                      veiculoOS.valorMaoDeObraOS.toString(),
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 18),
                                 ),
                                 Text(
                                   "Local de serviço:  " +
                                       veiculoOS.localResponsavelOS,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 18),
                                 ),
+
+
+
+
+
                               ],
                             ),
                           ),
