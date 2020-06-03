@@ -70,7 +70,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Descreva seu veículo"),
+        title: Text("Descreva seu veículo",style: TextStyle(color: Colors.deepPurple),),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.home),
@@ -226,9 +226,8 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
           _validarDados();
         },
         tooltip: 'Increment Counter',
-        child: SingleChildScrollView(
           child: Icon(Icons.add_circle),
-        ),
+
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

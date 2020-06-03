@@ -31,10 +31,13 @@ class _PainelClienteState extends State<PainelCliente> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("MecanicaSystem"),
+        title: Text(
+          "MecanicaSystem",
+          style: TextStyle(color: Colors.deepPurple),
+        ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home, color: Colors.deepPurple,),
             onPressed: () {},
           ),
           IconButton(
@@ -42,10 +45,7 @@ class _PainelClienteState extends State<PainelCliente> {
             onPressed: () {
               Navigator.pushNamed(context, RouteGenerator.ROTA_MINHA_GARAGEM);
             },
-
           ),
-
-
           PopupMenuButton<String>(
             onSelected: _escolhaMenuItem,
             itemBuilder: (contex) {
@@ -58,13 +58,6 @@ class _PainelClienteState extends State<PainelCliente> {
             },
           )
         ],
-
-
-
-
-
-
-
       ),
       body: Container(
         decoration: BoxDecoration(color: Colors.grey[200]),
@@ -142,11 +135,8 @@ class _PainelClienteState extends State<PainelCliente> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
                     onPressed: () {
-
                       Navigator.pushNamed(
                           context, RouteGenerator.ROTA_ALCOOL_GASOLINA);
-
-
                     },
                   ),
                 ),
@@ -162,7 +152,6 @@ class _PainelClienteState extends State<PainelCliente> {
                     onPressed: () {
                       Navigator.pushNamed(
                           context, RouteGenerator.ROTA_INFO_APLICATIVO);
-
                     },
                   ),
                 ),

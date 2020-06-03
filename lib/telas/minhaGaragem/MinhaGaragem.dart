@@ -21,7 +21,7 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
         .collection("usuarios")
         .document(_idUsuarioLogado)
         .collection("veiculos")
-        .orderBy("kilometragemVeiculo",descending: false)
+        .orderBy("kilometragemVeiculo", descending: false)
         .getDocuments();
 
     List<VeiculoCliente> listaVeiculos = List();
@@ -56,28 +56,31 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Minha Garagem"),
+      appBar: AppBar(
+          title: Text(
+            "Minha Garagem",
+            style: TextStyle(color: Colors.deepPurple),
+          ),
           actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.home),
-          onPressed: () {
-            Navigator.pushNamedAndRemoveUntil(
-                context, RouteGenerator.ROTA_PAINEL_CLIENTE, (_) => false);
-          },
-        ),
-        IconButton(
-          icon: Icon(Icons.directions_car),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: Icon(Icons.description),
-          onPressed: () {},
-        )
-
-
-
-
-      ]),
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, RouteGenerator.ROTA_PAINEL_CLIENTE, (_) => false);
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.directions_car,
+                color: Colors.deepPurple,
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.description),
+              onPressed: () {},
+            )
+          ]),
       body: Container(
         child: FutureBuilder<List<VeiculoCliente>>(
           future: _recuperarVeiculos(),
