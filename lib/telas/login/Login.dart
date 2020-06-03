@@ -129,7 +129,8 @@ class _LoginState extends State<Login> {
                   padding: EdgeInsets.only(top: 16, bottom: 10),
                   child: RaisedButton(
                     child: Text("ENTRAR",
-                        style: TextStyle(color: Colors.deepPurple, fontSize: 20)),
+                        style:
+                            TextStyle(color: Colors.deepPurple, fontSize: 20)),
                     color: Colors.grey[50],
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     shape: RoundedRectangleBorder(
@@ -147,7 +148,7 @@ class _LoginState extends State<Login> {
                         child: Column(
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(13.0),
                               child: Row(
                                 children: <Widget>[
                                   Text(
@@ -169,7 +170,7 @@ class _LoginState extends State<Login> {
                         child: Column(
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(13.0),
                               child: Row(
                                 children: <Widget>[
                                   Text(
@@ -183,8 +184,8 @@ class _LoginState extends State<Login> {
                           ],
                         ),
                         onTap: () {
-                          /* Navigator.pushReplacementNamed(
-                              context, RouteGenerator.ROTA_CADASTRAR_RECUPERAR_SENHA);*/
+                          Navigator.pushNamed(
+                              context, RouteGenerator.ROTA_RECUPERAR_SENHA);
                         },
                       ),
                     ],

@@ -35,7 +35,7 @@ class _CadastrarClienteState extends State<CadastrarCliente> {
       if (nome.isNotEmpty && nome.length > 3) {
         if ((email1.toString() == email2.toString()) &&
             email1.isNotEmpty &&
-            email1.contains("@")) {
+            email1.contains("@") && email1.contains(".")) {
           if ((senha1.toString() == senha2.toString()) && senha1.length > 5) {
             setState(() {
               _mensagemErro = "";
