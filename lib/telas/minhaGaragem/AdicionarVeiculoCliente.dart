@@ -17,6 +17,7 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
   TextEditingController _controllerTipoVeiculo = TextEditingController();
   TextEditingController _controllerMontadoraVeiculo = TextEditingController();
   TextEditingController _controllerNomeVeiculo = TextEditingController();
+  TextEditingController _controllerModeloVeiculo = TextEditingController();
   TextEditingController _controllerAnoVeiculo = TextEditingController();
   TextEditingController _controllerKilometragemVeiculo =
       TextEditingController();
@@ -27,15 +28,16 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
     String tipoVeiculo = _controllerTipoVeiculo.text;
     String montadoraVeiculo = _controllerMontadoraVeiculo.text;
     String nomeVeiculo = _controllerNomeVeiculo.text;
-    String anoVeiculo = _controllerAnoVeiculo.text;
-    String kilometragemVeiculo = _controllerKilometragemVeiculo.text;
+    String modeloVeiculo = _controllerModeloVeiculo.text;
+    int anoVeiculo = int.tryParse(_controllerAnoVeiculo.text);
+    int kilometragemVeiculo = int.tryParse(_controllerKilometragemVeiculo.text);
     String placaVeiculo = _controllerPlacaVeiculo.text;
 
     if (tipoVeiculo.isNotEmpty) {
       if (montadoraVeiculo.isNotEmpty) {
         if (nomeVeiculo.isNotEmpty) {
-          if (anoVeiculo.isNotEmpty) {
-            if (kilometragemVeiculo.isNotEmpty) {
+          if (anoVeiculo>1900) {
+            if (kilometragemVeiculo>=0) {
               if (placaVeiculo.isNotEmpty) {
                 FirebaseAuth auth = FirebaseAuth.instance;
                 FirebaseUser usuarioLogado = await auth.currentUser();
@@ -45,8 +47,10 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                 veiculoCliente.montadoraVeiculo = montadoraVeiculo;
                 veiculoCliente.nomeVeiculo = nomeVeiculo;
                 veiculoCliente.anoVeiculo = anoVeiculo;
-                veiculoCliente.kilometragemVeiculo = kilometragemVeiculo;
+                veiculoCliente.kilometragemDeCadastro = kilometragemVeiculo;
+                veiculoCliente.kilometragemAtual = kilometragemVeiculo;
                 veiculoCliente.placaVeiculo = placaVeiculo;
+                veiculoCliente.dataCadastro = DateTime.now();
 
                 Firestore db = Firestore.instance;
                 DocumentReference docRef = await db
@@ -160,9 +164,27 @@ class _AdicionarVeiculoCLienteState extends State<AdicionarVeiculoCLiente> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
-                    controller: _controllerAnoVeiculo,
+                    controller: _controllerModeloVeiculo,
                     autofocus: true,
                     keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 20),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                        hintText: "Modelo, ex: mille 1.0 8v",
+                        hintStyle: TextStyle(fontSize: 16),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32),
+                        )),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 12),
+                  child: TextField(
+                    controller: _controllerAnoVeiculo,
+                    autofocus: true,
+                    keyboardType: TextInputType.number,
                     style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),

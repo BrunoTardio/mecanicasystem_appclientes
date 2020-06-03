@@ -21,7 +21,7 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
         .collection("usuarios")
         .document(_idUsuarioLogado)
         .collection("veiculos")
-        .orderBy("kilometragemVeiculo", descending: false)
+        //.orderBy("kilometragemAtual", descending: false)
         .getDocuments();
 
     List<VeiculoCliente> listaVeiculos = List();
@@ -31,11 +31,14 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
       print(item.documentID);
       veiculo.idVeiculo = item.documentID;
       veiculo.tipoVeiculo = dados['tipoVeiculo'];
+      print(veiculo.tipoVeiculo);
       veiculo.nomeVeiculo = dados['nomeVeiculo'];
       veiculo.placaVeiculo = dados['placaVeiculo'];
-      veiculo.kilometragemVeiculo = dados['kilometragemVeiculo'];
+      veiculo.kilometragemAtual = dados['kilometragemAtual'];
       veiculo.anoVeiculo = dados['anoVeiculo'];
       veiculo.montadoraVeiculo = dados['montadoraVeiculo'];
+      Timestamp time = dados['dataCadastro'];
+      veiculo.dataCadastro = DateTime.tryParse(time.toDate().toUtc().toIso8601String());
 
       listaVeiculos.add(veiculo);
     }
@@ -118,7 +121,7 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                         },
                         child: Card(
                           child: Padding(
-                            padding: EdgeInsets.all(50.0),
+                            padding: EdgeInsets.all(20.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,21 +146,13 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                                       fontSize: 16),
                                 ),
                                 Text(
-                                  "Montadora :  " +
-                                      veiculoCliente.montadoraVeiculo,
+                                  "Ano :  " + veiculoCliente.anoVeiculo.toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                 ),
                                 Text(
-                                  "Ano :  " + veiculoCliente.anoVeiculo,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
-                                ),
-                                Text(
-                                  "Kilometragem :  " +
-                                      veiculoCliente.kilometragemVeiculo,
+                                  "Kilometragem Atual :  " + veiculoCliente.kilometragemAtual.toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),

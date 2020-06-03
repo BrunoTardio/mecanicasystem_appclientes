@@ -1,5 +1,4 @@
 class VeiculoCliente {
-
   String _idVeiculo;
 
   String _tipoVeiculo;
@@ -8,11 +7,17 @@ class VeiculoCliente {
 
   String _nomeVeiculo;
 
-  String _anoVeiculo;
+  String _modeloVeiculo;
 
-  String _kilometragemVeiculo;
+  int _anoVeiculo;
+
+  DateTime _dataCadastro;
 
   String _placaVeiculo;
+
+  int _kilometragemDeCadastro;
+
+  int _kilometragemAtual;
 
   VeiculoCliente();
 
@@ -22,8 +27,10 @@ class VeiculoCliente {
       "montadoraVeiculo": this.montadoraVeiculo,
       "nomeVeiculo": this.nomeVeiculo,
       "anoVeiculo": this.anoVeiculo,
-      "kilometragemVeiculo": this.kilometragemVeiculo,
+      "kilometragemDeCadastro": this._kilometragemDeCadastro,
+      "kilometragemAtual": this.kilometragemAtual,
       "placaVeiculo": this.placaVeiculo,
+      "dataCadastro": this.dataCadastro
     };
     return map;
   }
@@ -32,18 +39,6 @@ class VeiculoCliente {
 
   set placaVeiculo(String value) {
     _placaVeiculo = value;
-  }
-
-  String get kilometragemVeiculo => _kilometragemVeiculo;
-
-  set kilometragemVeiculo(String value) {
-    _kilometragemVeiculo = value;
-  }
-
-  String get anoVeiculo => _anoVeiculo;
-
-  set anoVeiculo(String value) {
-    _anoVeiculo = value;
   }
 
   String get nomeVeiculo => _nomeVeiculo;
@@ -68,5 +63,35 @@ class VeiculoCliente {
 
   set idVeiculo(String value) {
     _idVeiculo = value;
+  }
+
+  int get kilometragemAtual => _kilometragemAtual;
+
+  set kilometragemAtual(int value) {
+    _kilometragemAtual = value;
+  }
+
+  int get kilometragemDeCadastro => _kilometragemDeCadastro;
+
+  set kilometragemDeCadastro(int value) {
+    _kilometragemDeCadastro = value;
+  }
+
+  DateTime get dataCadastro => _dataCadastro;
+
+  set dataCadastro(DateTime value) {
+    _dataCadastro = value;
+  }
+
+  int get anoVeiculo => _anoVeiculo;
+
+  set anoVeiculo(int value) {
+    _anoVeiculo = value;
+  }
+
+  String get modeloVeiculo => _modeloVeiculo;
+
+  set modeloVeiculo(String value) {
+    _modeloVeiculo = value;
   }
 }
