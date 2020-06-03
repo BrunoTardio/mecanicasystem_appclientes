@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:mecanicasystemappclientes/model/VeiculoCliente.dart';
 
 class VeiculoDetalheAbaDetalhes extends StatefulWidget {
+  String _idUsuarioLogado;
+
+  VeiculoCliente _veiculoCliente = VeiculoCliente();
+
+  VeiculoDetalheAbaDetalhes(this._idUsuarioLogado, this._veiculoCliente);
+
+  String get idUsuarioLogado => _idUsuarioLogado;
+
+  set idUsuarioLogado(String value) {
+    _idUsuarioLogado = value;
+  }
+
   @override
   _VeiculoDetalheAbaDetalhesState createState() =>
       _VeiculoDetalheAbaDetalhesState();
+
+  VeiculoCliente get veiculoCliente => _veiculoCliente;
+
+  set veiculoCliente(VeiculoCliente value) {
+    _veiculoCliente = value;
+  }
 }
 
 class _VeiculoDetalheAbaDetalhesState extends State<VeiculoDetalheAbaDetalhes> {
@@ -24,74 +43,90 @@ class _VeiculoDetalheAbaDetalhesState extends State<VeiculoDetalheAbaDetalhes> {
                     Row(
                       children: <Widget>[
                         Text(
-                          "Veículo :  ",
+                          "Ficha técnica",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Colors.red,
-                              fontSize: 16),
+                              color: Colors.deepPurple,
+                              fontSize: 20),
                         ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         Text(
-                          "Placa :  ",
+                          "Veículo :  " + widget._veiculoCliente.nomeVeiculo,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              fontSize: 18),
                         ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         Text(
-                          "Montadora :  ",
+                          "Placa :  " + widget._veiculoCliente.placaVeiculo,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                              fontWeight: FontWeight.normal, fontSize: 18),
                         ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         Text(
-                          "Ano :  ",
+                          "Montadora :  " +
+                              widget._veiculoCliente.montadoraVeiculo,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                              fontWeight: FontWeight.normal, fontSize: 18),
                         ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         Text(
-                          "Kilometragem :  ",
+                          "Ano :  " +
+                              widget._veiculoCliente.anoVeiculo.toString(),
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                              fontWeight: FontWeight.normal, fontSize: 18),
                         ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         Text(
-                          "Data de cadastro :  ",
+                          "Km atual :  " +
+                              widget._veiculoCliente.kilometragemAtual
+                                  .toString(),
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                              fontWeight: FontWeight.normal, fontSize: 18),
                         ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         Text(
-                          "Local :  ",
+                          "Km de cadastro :  " +
+                              widget._veiculoCliente.kilometragemDeCadastro
+                                  .toString(),
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                              fontWeight: FontWeight.normal, fontSize: 18),
                         ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         Text(
-                          "Dono anterior :  ",
+                          "Data de cadastro :  " +
+                              widget._veiculoCliente.dataCadastro.day
+                                  .toString() +
+                              "/" +
+                              widget._veiculoCliente.dataCadastro.month
+                                  .toString() +
+                              "/" +
+                              widget._veiculoCliente.dataCadastro.year
+                                  .toString(),
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                              fontWeight: FontWeight.normal, fontSize: 18),
                         ),
                       ],
                     ),
@@ -109,53 +144,47 @@ class _VeiculoDetalheAbaDetalhesState extends State<VeiculoDetalheAbaDetalhes> {
                     Row(
                       children: <Widget>[
                         Text(
-                          "Total de serviços  :  ",
+                          "Custos gerais ",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.deepPurple,
-                              fontSize: 16),
+                              fontSize: 20),
                         ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         Text(
-                          "Total gasto em peças  :  ",
+                          "Gasto em peças  :  ",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.deepPurple,
-                              fontSize: 16),
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              fontSize: 18),
                         ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         Text(
-                          "Total gasto em mão de obra :  ",
+                          "Gasto em mão de obra  :  ",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.deepPurple,
-                              fontSize: 16),
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              fontSize: 18),
                         ),
                       ],
                     ),
-
                     Row(
                       children: <Widget>[
                         Text(
-                          "Custo medio por KM :  ",
+                          "Custo médio por KM  :  ",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.deepPurple,
-                              fontSize: 16),
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              fontSize: 18),
                         ),
                       ],
                     ),
-
-
-
-
-
                   ],
                 ),
               ),

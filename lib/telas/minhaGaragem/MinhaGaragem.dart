@@ -31,14 +31,16 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
       print(item.documentID);
       veiculo.idVeiculo = item.documentID;
       veiculo.tipoVeiculo = dados['tipoVeiculo'];
-      print(veiculo.tipoVeiculo);
       veiculo.nomeVeiculo = dados['nomeVeiculo'];
+      veiculo.modeloVeiculo = dados['modeloVeiculo'];
       veiculo.placaVeiculo = dados['placaVeiculo'];
       veiculo.kilometragemAtual = dados['kilometragemAtual'];
+      veiculo.kilometragemDeCadastro = dados['kilometragemDeCadastro'];
       veiculo.anoVeiculo = dados['anoVeiculo'];
       veiculo.montadoraVeiculo = dados['montadoraVeiculo'];
       Timestamp time = dados['dataCadastro'];
-      veiculo.dataCadastro = DateTime.tryParse(time.toDate().toUtc().toIso8601String());
+      veiculo.dataCadastro =
+          DateTime.tryParse(time.toDate().toUtc().toIso8601String());
 
       listaVeiculos.add(veiculo);
     }
@@ -146,13 +148,16 @@ class _MinhaGaragemState extends State<MinhaGaragem> {
                                       fontSize: 16),
                                 ),
                                 Text(
-                                  "Ano :  " + veiculoCliente.anoVeiculo.toString(),
+                                  "Ano :  " +
+                                      veiculoCliente.anoVeiculo.toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                 ),
                                 Text(
-                                  "Kilometragem Atual :  " + veiculoCliente.kilometragemAtual.toString(),
+                                  "Kilometragem Atual :  " +
+                                      veiculoCliente.kilometragemAtual
+                                          .toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),

@@ -78,7 +78,7 @@ class _VeiculoDetalheState extends State<VeiculoDetalhe>
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          VeiculoDetalheAbaDetalhes(),
+          VeiculoDetalheAbaDetalhes(widget._idUsuarioLogado,widget._veiculoCliente),
           VeiculoDetalheAbaOS(widget._idUsuarioLogado,widget._veiculoCliente)],
       ),
     );
